@@ -9,7 +9,8 @@ services:
     depends_on:
       - db
     environment:
-      - ConnectionStrings__DefaultConnection=Server=db;Database=TableViewerDb;User=sa;Password=password123;TrustServerCertificate=True
+      - ConnectionStrings__DefaultConnection=Server=db;Database=AppDb;User=sa;Password=Password123;TrustServerCertificate=True
+      - ASPNETCORE_URLS=http://+:80
 
   frontend:
     build:
@@ -23,7 +24,7 @@ services:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: mssql
     environment:
-      SA_PASSWORD: "password123"
+      SA_PASSWORD: "Password123"
       ACCEPT_EULA: "Y"
     ports:
       - "1433:1433"
