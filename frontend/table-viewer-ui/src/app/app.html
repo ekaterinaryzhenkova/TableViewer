@@ -1,0 +1,36 @@
+<div class="container">
+  <h2>Products</h2>
+
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Views</th>
+      <th>Purchases</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let p of products$ | async">
+      <td>{{p.id}}</td>
+      <td>{{p.name}}</td>
+      <td>{{p.price}}</td>
+      <td>{{p.viewCount}}</td>
+      <td>{{p.purchaseCount}}</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <button (click)="toggleForm()">Add</button>
+  <div *ngIf="showForm" class="form">
+    <input placeholder="Name" [(ngModel)]="newProduct.name">
+    <input type="number" placeholder="Price" [(ngModel)]="newProduct.price">
+    <input type="number" placeholder="Views" [(ngModel)]="newProduct.viewCount">
+    <input type="number" placeholder="Purchases" [(ngModel)]="newProduct.purchaseCount">
+
+    <button (click)="addProduct()">Save</button>
+  </div>
+
+</div>
