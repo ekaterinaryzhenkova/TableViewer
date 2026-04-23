@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./TableViewer
+    ports:
+      - "5013:80"
+    depends_on:
+      - db
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=db;Database=TableViewerDb;User=sa;Password=password123;TrustServerCertificate=True
+
+  frontend:
+    build:
+      context: ./frontend/table-viewer-ui
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: mssql
+    environment:
+      SA_PASSWORD: "password123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql_data:/var/opt/mssql
+
+volumes:
+  mssql_data:
